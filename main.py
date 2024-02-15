@@ -1,4 +1,4 @@
-TOKEN = '6934530736:AAHelBs4aY0crgyxLTbcANG2TIlfmM60pHU'
+TOKEN = '6839306954:AAGWv-_ptLiPjpDRnxwRCpPFGaWbhNs2g3M'
 
 
 import logging
@@ -15,8 +15,8 @@ logging.basicConfig(
 async def start(update: Update, context: CallbackContext):
     user = update.effective_user
     await update.message.reply_html(
-        f"Привет, {user.mention_html()}! Я маленький бот для получения картинок с Марса. "
-        "Пожалуйста, отправь мне дату в формате 'гггг-мм-дд'. Если что то епадёт не волнуйся, я только учусь."
+        f"Hello, {user.mention_html()}! Am a simple bot for getting Images from planet Mars. "
+        "To get images of a certain day,Just send me the dates in the form of yyyy-mm-dd. I will send you the pictures available for that day.Join my updates channel at @InfinityHackersKE ."
     )
 
 
@@ -53,7 +53,7 @@ async def get_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "SUPERCAM_RMI"
         ]
 
-    await context.bot.send_message(chat_id=chat_id, text='Секундочку...')
+    await context.bot.send_message(chat_id=chat_id, text='Just a second...')
     photo_list = []
     for cam in camera:
         params = {
@@ -73,10 +73,10 @@ async def get_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         await context.bot.send_message(
             chat_id=chat_id,
-            text=f'Доступность камер: {len(photo_list)}/{len(camera)}. Загружаем сники...')
+            text=f'Camera availability: {len(photo_list)}/{len(camera)}. Loading sneeks...')
         await context.bot.send_media_group(chat_id=chat_id, media=photo_list)
     except:
-        await context.bot.send_message(chat_id=chat_id, text=f'За {earth_date} нет фотографий')
+        await context.bot.send_message(chat_id=chat_id, text=f'Ooops,there are no photos for {earth_date}')
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TOKEN).build()
